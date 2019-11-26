@@ -10,8 +10,8 @@ Run:
 
 ## Test suites
 
-Les tests suites sont un enchainement d'entrées utilisateur (commenté dans l'entrypoint: `src/index.js`).
-Si vous voulez les lancer il faut décommenter `startPrompt(createUnitStore())`.
+Les tests suites sont un enchainement d'entrées utilisateur (à décommenté dans l'entrypoint: `src/index.js`).
+Si vous voulez les lancer il faut commenter `startPrompt(createUnitStore())`.
 
 ## Prompt
 
