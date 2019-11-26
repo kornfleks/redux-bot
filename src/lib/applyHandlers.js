@@ -2,16 +2,18 @@ import { passiveOutput } from './io'
 
 const applyHandlers = (...handlers) => store => {
   const handlersMap = handlers.reduce((acc, handler) => ({ ...acc, ...handler }), {})
-
-  return next => action => {
-    next(action) // call reducers, changing state(s)
-    const state = store.getState() // get next state
-    const handler = handlersMap[action.type]
+  const callHandler = action => type => {
+    const state = store.getState()
+    const handler = handlersMap[type]
     if (handler) {
-      handler(state, action, store.dispatch)
+      handler(state, action, callHandler(action))
     } else {
       passiveOutput('Désolé, je ne comprends pas...')
     }
+  }
+  return next => action => {
+    next(action) // call reducers, changing state(s)
+    callHandler(action)(action.type)
   }
 }
 

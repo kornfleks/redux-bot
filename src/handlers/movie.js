@@ -1,6 +1,7 @@
 import * as types from '../types/movie'
 import * as actions from '../actions/movie'
 import * as ticketActions from '../actions/ticket'
+import * as ticketTypes from '../types/ticket'
 
 import { output } from '../lib/io'
 
@@ -17,16 +18,9 @@ const handleShowSynopsis = (state, action) => {
   }
 }
 
-const handleReplyMovieSuggestion = (state, action, dispatch) => {
+const handleReplyMovieSuggestion = (state, action, callHandler) => {
   if (!action.accept) {
-    // si la personne à déjà eu une suggestion de film, c'est quel a déjà une quantité de billet
-    // si elle a refusé la suggestion est effacé
-    // on lui revalide sa quantité de billet,
-    // le handleSetTicket lui demandera juste quel film elle veut voire si elle l'a pas précisé en refusant
-    // si elle a précisé le film en refusant il lui dira qu'il a ajouté X billet pour le film Y
-    // on pourrait aussi le faire ici, mais c'est plus simple de laisser faire l'autre handler
-    // a voire si on pourrait pas avoir accès au autre handler pour les appeler directement d'ici
-    return dispatch(ticketActions.setTicketQuantity(state.ticket.quantity))
+    return callHandler(ticketTypes.SET_TICKET_QUANTITY) // affiche
   }
   // si la personne a accepté le reducer a mis la valeur de suggestionItem dans selectedItem
   if (state.ticket.quantity) {
