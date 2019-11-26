@@ -1,0 +1,3 @@
+
+export const GREETINGS = '@MAIN/GREETINGS'
+export const REQUEST_SUMMARY = '@MAIN/REQUEST_SUMMARY'
